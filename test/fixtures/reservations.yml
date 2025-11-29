@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  harvest_experience: one
+  number_of_people: 1
+  status: MyString
+  reserved_at: 2025-11-30 00:31:44
+
+two:
+  user: two
+  harvest_experience: two
+  number_of_people: 1
+  status: MyString
+  reserved_at: 2025-11-30 00:31:44
