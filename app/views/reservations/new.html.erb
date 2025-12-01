@@ -29,8 +29,12 @@
   </div>
 
   <div class="mb-4">
-    <%= f.label :title, "収穫体験名", class: "block text-gray-700 font-medium mb-2" %>
-    <%= f.text_field :title, class: "w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" %>
+    <%= f.label :harvest_experience_id, "収穫体験を選択", class: "block text-gray-700 font-medium mb-2" %>
+    <%= f.collection_select :harvest_experience_id, 
+        HarvestExperience.all,
+        :id, :title,
+        { prompt: "選択してください" }, 
+        { class: "block text-gray-700 w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" } %>
   </div>
 
   <div class="mb-4">
