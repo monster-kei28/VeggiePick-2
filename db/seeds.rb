@@ -9,6 +9,6 @@
 #   end
 HarvestExperience.create!(
   [
-    { title: "さつまいも掘り", capacity: 20 },
+    { title: "さつまいも掘り", capacity: 20 }
   ]
 )
