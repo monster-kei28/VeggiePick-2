@@ -4,17 +4,17 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    # ① User を作成（または既存の電話番号ユーザーがいれば取得）
-    user = User.find_or_create_by(phone_number: params[:reservation][:phone_number]) do |u|
+    # ① User を作成 or 取得（← @user に変更）
+    @user = User.find_or_create_by(phone_number: params[:reservation][:phone_number]) do |u|
       u.name = params[:reservation][:name]
     end
 
     # ② Reservation に紐付ける
     @reservation = Reservation.new(reservation_params)
-    @reservation.user_id = user.id
+    @reservation.user_id = @user.id
 
     # ③ 保存
-    if @reservation.save
+    if @user.valid? && @reservation.save
       redirect_to root_path, notice: "予約が完了しました"
     else
       render :new, status: :unprocessable_entity
