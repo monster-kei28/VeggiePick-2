@@ -7,8 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-HarvestExperience.create!(
-  [
-    { title: "さつまいも掘り", capacity: 20 }
-  ]
-)
+harvest_experiences = [
+  { title: "さつまいも掘り" },
+  { title: "みかん狩り" },
+  { title: "いちご狩り" }
+]
+
+harvest_experiences.each do |attrs|
+  HarvestExperience.find_or_create_by!(title: attrs[:title])
+end
