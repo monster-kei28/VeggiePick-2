@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
+    @harvest_experiences = HarvestExperience.all
   end
 
   def create
