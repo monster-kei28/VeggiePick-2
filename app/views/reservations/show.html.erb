@@ -1,0 +1,25 @@
+<h2 class="text-center mt-8 mb-6 text-xl font-bold">
+  ご予約内容の確認
+</h2>
+
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+
+  <p>お名前：<%= @reservation.user.name %></p>
+  <p>電話番号：<%= @reservation.user.phone_number %></p>
+
+  <p>体験内容：<%= @reservation.harvest_experience.title %></p>
+  <p>人数：<%= @reservation.number_of_people %></p>
+  <p>予約日時：<%= @reservation.reserved_at.strftime("%Y年%m月%d日 %H:%M") %></p>
+
+  <div class="text-center mt-6">
+    <%= link_to "トップへ戻る", root_path,
+      class: "bg-orange-100 hover:bg-orange-400 font-bold py-2 px-4 rounded border-2 border-orange-200 inline-block" %>
+  </div>
+</div>
+
+<div class="text-center mt-6">
+  <%= link_to "この予約を取り消す",
+    reservation_path(@reservation),
+    data: { turbo_method: :delete, turbo_confirm: "本当にこの予約を取り消しますか？" },
+    class: "bg-red-200 hover:bg-red-400 font-bold py-2 px-4 rounded border-2 border-red-300 inline-block" %>
+</div>
