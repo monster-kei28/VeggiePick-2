@@ -1,4 +1,5 @@
 class Admin::ReservationsController < ApplicationController
+  #レビュー後 nameとpassword変更しGitHubをprivateに変更
   http_basic_authenticate_with name: "admin", password: "password"
 
   def index
