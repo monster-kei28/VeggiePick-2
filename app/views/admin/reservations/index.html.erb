@@ -1,0 +1,44 @@
+<h2 class="text-center mt-8 mb-6 text-2xl font-bold">
+  予約一覧（管理者）
+</h2>
+
+<table class="mx-auto border-collapse border border-gray-300 w-11/12 text-sm">
+  <thead class="bg-gray-100">
+    <tr>
+      <th class="border px-3 py-2">名前</th>
+      <th class="border px-3 py-2">電話</th>
+      <th class="border px-3 py-2">体験</th>
+      <th class="border px-3 py-2">人数</th>
+      <th class="border px-3 py-2">日時</th>
+      <th class="border px-3 py-2">操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |r| %>
+      <tr class="text-center">
+        <td class="border px-2 py-2"><%= r.user.name %></td>
+        <td class="border px-2 py-2"><%= r.user.phone_number %></td>
+        <td class="border px-2 py-2"><%= r.harvest_experience.title %></td>
+        <td class="border px-2 py-2"><%= r.number_of_people %></td>
+        <td class="border px-2 py-2">
+          <%= r.reserved_at.strftime("%Y/%m/%d %H:%M") %>
+        </td>
+        <td class="border px-2 py-2">
+          <%= link_to "詳細", admin_reservation_path(r),
+              class: "text-blue-600 underline mr-2" %>
+
+          <%= link_to "削除",
+              admin_reservation_path(r),
+              data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+              class: "text-red-600 underline" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center mt-8">
+  <%= link_to "トップへ戻る", root_path,
+      class: "bg-gray-200 hover:bg-gray-400 font-bold py-2 px-6 rounded border" %>
+</div>
