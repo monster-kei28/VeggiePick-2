@@ -7,4 +7,8 @@ Rails.application.routes.draw do
       post :lookup    # 電話番号で検索
     end
   end
+
+  namespace :admin do
+    resources :reservations, only: %i[index show destroy]
+  end
 end
