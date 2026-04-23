@@ -94,6 +94,19 @@ UIだけでなく、必ずサーバ側でも予約を制御しています。
 
 ---
 
+### ■ 画像をCMS的に管理
+
+トップページ・ガイドページの画像は `PageImage` モデルで管理。
+
+- page_type（top/guide）× slot（hero/main/sub_banner）の組み合わせで配置を制御
+- published フラグで表示・非表示を切り替え可能
+- 管理画面から差し替え可能（AWS S3 + CarrierWave）
+- MiniMagick で 1600x900 にリサイズ＋WebP変換
+
+コードを変更せずに農園スタッフが画像を更新できる設計にしています。
+
+---
+
 ### ■ 外部依存を最小化
 
 LINE通知は外部APIを利用していますが、
@@ -110,14 +123,18 @@ LINE通知は外部APIを利用していますが、
 ### 一般ユーザー
 - 予約作成（名前・電話番号・人数・日時）
 - 予約確認
+- 予約検索（電話番号で検索）
 - キャンセル
 - LINEログイン（任意）
 
 ### 管理者
 - 管理者ログイン（LINE + Adminテーブル）
-- 予約一覧表示
+- 予約一覧表示・詳細確認・CSV出力
 - 営業日設定（CalendarEvent）
+- 体験プログラム管理（HarvestExperience）
+- ユーザー一覧表示
 - 管理者追加／削除
+- トップページ・ガイドページの画像編集（S3連携）
 
 ---
 
@@ -130,21 +147,29 @@ LINE通知は外部APIを利用していますが、
 
 ### Frontend
 - Tailwind CSS
+- Hotwire（Turbo / Stimulus）
+- simple_calendar（カレンダー表示）
+
+### 画像管理
+- CarrierWave + MiniMagick
+- AWS S3（本番環境）
 
 ### 認証・外部連携
 - OmniAuth（LINEログイン）
-- LINE Messaging API
+- LINE Messaging API（予約完了・キャンセル時に自動通知）
 
-### インフラ
-- Render
+### インフラ・開発環境
+- Render（本番）
+- Docker / Docker Compose（開発）
 
 ---
 
 ## 🧪 品質担保
 
 - RSpec（Model / Request）
-- RuboCop
-- GitHub ActionsによるCI
+- RuboCop（Rails Omakase）
+- Brakeman（セキュリティスキャン）
+- GitHub ActionsによるCI（テスト・Lint・セキュリティスキャンを並列実行）
 
 ---
 
@@ -152,9 +177,7 @@ LINE通知は外部APIを利用していますが、
 
 - LIFFを用いたLINE内予約フロー
 - 多言語対応
-- LINEで管理者に通知を送信する
 - 予約リマインド通知
-- 画像付き体験紹介ページ（S3対応）
 
 ---
 
